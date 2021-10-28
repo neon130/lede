@@ -68,7 +68,7 @@ $(BUILD_DIR)/.prepared: Makefile
 	@mkdir -p $$(dirname $@)
 	@touch $@
 
-tmp/.prereq_packages: .config
+tmp/.prereq_packages: 11.config
 	unset ERROR; \
 	for package in $(sort $(prereq-y) $(prereq-m)); do \
 		$(_SINGLE)$(NO_TRACE_MAKE) -s -r -C package/$$package prereq || ERROR=1; \
@@ -113,7 +113,7 @@ diffconfig: FORCE
 buildinfo: FORCE
 	$(_SINGLE)$(SUBMAKE) -r diffconfig buildversion feedsversion
 
-prepare: .config $(tools/stamp-compile) $(toolchain/stamp-compile)
+prepare: 11.config $(tools/stamp-compile) $(toolchain/stamp-compile)
 	$(_SINGLE)$(SUBMAKE) -r buildinfo
 
 world: prepare $(target/stamp-compile) $(package/stamp-compile) $(package/stamp-install) $(target/stamp-install) FORCE
